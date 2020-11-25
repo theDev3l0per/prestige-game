@@ -71,7 +71,7 @@ function loop() { // don't change this stuff unless you know what you're doing
   $("bankbuy").innerHTML = `Buy a bank for ${game.cost3} points`;
   $("derivativebuy").innerHTML = `Buy a derivative for ${game.cost4} b`;
   $("dpower").innerHTML = `You have ${Math.floor(game.dpower)} Derivative Power, giving a ${Math.round(Math.log10(game.dpower+1)+1)}x multiplier to point production`
-  $("prestige").innerHTML = `Prestige for ${Math.floor(Math.log2(game.points/100000))*(game.pu[4]==1 ? 2 : 1)+1} b`
+  $("prestige").innerHTML = `Prestige for ${Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1))+1} b`
   $("b").innerHTML = `You have ${game.b} b`
   $("pu1").innerHTML = `Gain a multiplier to point production based on time played <br> Cost: 1 b <br> Currently: ${Math.round(2*Math.log10(game.time))}x`
   $("pu3").innerHTML = `Banks are more powerful based on Incrementers bought <br> Cost: 5 b <br> Currently: ${Math.round(Math.log10(game.incrementers+1)+1)}x`
@@ -153,7 +153,7 @@ function loop() { // don't change this stuff unless you know what you're doing
     }
   }
   if(game.automators[3] == true){
-    if(Math.floor(Math.log2(game.points/100000))*(game.pu[4]==1 ? 2 : 1)+1 >= game.autoprestigeamt){
+    if(Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1))+1 >= game.autoprestigeamt){
       prestige();
     }
   }
@@ -223,8 +223,8 @@ function buyPU(x) {
 }
 
 function prestige() {
-    game.b += Math.floor(Math.log2(game.points/100000))*(game.pu[4]==1 ? 2 : 1)+1;
-    game.tb += Math.floor(Math.log2(game.points/100000))*(game.pu[4]==1 ? 2 : 1)+1;
+    game.b += Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1)+1);//what this formula is wrong it says log2(points*2/100000) instead of log2(points/100000)*2
+    game.tb += Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1)+1); //bruq I fixed it
     game.prestiges += 1;
     game.points = 0;
     game.incrementers = 1;
