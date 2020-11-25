@@ -1,0 +1,97 @@
+body {
+  font-family: helvetica, arial, sans-serif, typewriter;
+  margin: 2em;
+}
+
+button {
+  border-radius: 5px;
+}
+
+#points {
+  font-size: 25px;
+}
+
+.tab {
+  font-size: 20px;
+  transition-duration: 0.2s;
+}
+
+.tab:hover {
+  color: white;
+  background-color: gray;
+}
+
+#tab4, .prestige {
+  color: blue;
+  background-color: cyan;
+  border-color: blue;
+  transition-duration: 0.2s;
+}
+
+#tab4:hover, .prestige:hover {
+  color: cyan;
+  background-color: blue;
+}
+
+#prestige {
+  height: 75px;
+  width: 125px;
+  transition-duration: 0.2s;
+}
+
+.pulocked {
+  height: 100px;
+  width: 150px;
+  color: black;
+  background-color: #aaaaaa;
+  border-color: red;
+  transition-duration: 0.2s;
+}
+
+.pubuyable {
+  height: 100px;
+  width: 150px;
+  color: white;
+  background-color: red;
+  border-color: red;
+  transition-duration: 0.2s;
+}
+
+.pubought {
+  height: 100px;
+  width: 150px;
+  color: white;
+  background-color: green;
+  border-color: green;
+  transition-duration: 0.2s;
+}
+
+.buyable {
+  border-color: green;
+  color: green;
+  background-color: #dddddd;
+  transition-duration: 0.2s;
+}
+
+.buyable:hover {
+  color: white;
+  background-color: green;
+}
+
+.buyableLocked {
+  border-color: red;
+  color: black;
+  background-color: #aaaaaa;
+  transition-duration: 0.2s;
+}
+
+#pps {
+  font-size: 12px;
+  color: gray;
+}
+
+.discord {
+  color: cyan;
+  background-color: blue;
+  border-color: blue;
+}
