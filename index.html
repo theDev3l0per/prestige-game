@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Prestige Game</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" id="style">
+  </head>
+  
+  <body>
+    <script src="js/break_infinity_min.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/save.js"></script>
+    <div>
+      <b>Welcome to Prestige Game</b>
+    </div><br class="prestige" display="game.points >= 100000">
+    <button id="prestige" class="prestige" display="game.points >= 100000" onclick="prestige()">
+      Prestige for 0 b
+    </button><br><br>
+    <div id="points">
+      Points: 0
+    </div>
+    <div id="pps">
+      You are getting 0 points per second
+    </div>
+    <div id="b" style="color: #006bd6" display="game.tb > 0">
+      You have 0 b
+    </div><br display="game.tb > 0">
+    <button id="tab1" class="tab" onclick="tabSwitch(1)">
+      Production
+    </button>
+    <button id="tab2" class="tab" onclick="tabSwitch(2)">
+      Options
+    </button>
+    <button id="tab3" class="tab" onclick="tabSwitch(3)">
+      Statistics
+    </button>
+    <button id="tab4" class="tab" onclick="tabSwitch(4)" display="game.tb > 0">
+      Prestige
+    </button><br><br>
+    <div id="tab1disp" display="game.tab == 1">
+    <button display="game.tb > 0" onclick="maxAll()">
+      Max All
+    </button><br display="game.tb > 0"><br display="game.tb > 0">
+    <div id="inc">
+      Incrementers: 1
+    </div>
+    <button id="incbuy" onclick="buyInc(1)" class="buyable">
+      Buy an incrementer for 25 points
+    </button>
+    <button id="auto1" onclick="toggleAuto(1)" display="game.pu[3] == 1">
+      Auto: OFF
+    </button><br><br>
+    <div id="workers">
+      Workers: 0
+    </div>
+    <button id="workerbuy" onclick="buyInc(2)" class="buyable">
+      Buy a worker for 200 points
+    </button>
+    <button id="auto2" onclick="toggleAuto(2)" display="game.pu[5] == 1">
+      Auto: OFF
+    </button><br><br>
+    <div id="banks">
+      Banks: 0
+    </div>
+    <button id="bankbuy" onclick="buyInc(3)" class="buyable">
+      Buy a bank for 15000 points
+    </button>
+    <button id="auto3" onclick="toggleAuto(3)" display="game.pu[6] == 1">
+      Auto: OFF
+    </button><br><br>
+    <div id="derivatives" display="game.pu[9] == 1">
+      Derivatives: 0
+    </div><br>
+    <div id="dpower" display="game.pu[9] == 1">
+      You have 0 Derivative Power, giving a 1x multiplier to point production
+    </div><br>
+    <button id="derivativebuy" onclick="buyInc(4)" class="buyable" display="game.pu[9] == 1">
+      Buy a derivative for 100 b
+    </button><br><br>
+    </div>
+    <div id="tab2disp" display="game.tab == 2">
+      <button id="save" onclick="save()">
+        Save
+      </button>
+      <button id="reset" onclick="reset()">
+        Reset the game
+      </button>
+      <button id="discord" class="discord" onclick="window.location.href = 'https://discord.gg/VxHzjtgdA4';">
+        Discord Link
+      </button>
+    </div>
+    <div id="tab3disp" display="game.tab == 3">
+      <div id="info">
+        You have a total of x buildings.<br>
+        You have collected a total of x b.<br>
+        You have prestiged x times.<br>
+        You have played this game for x seconds.
+      </div>
+    </div>
+    <div id="tab4disp" display="game.tab == 4">
+      <table>
+        <tr>
+          <td>
+        <button id="pu1" class="pulocked" onclick="buyPU(1)">
+          Gain a multiplier to point production based on time played <br> Cost: 1 b <br> Currently: x
+        </button>
+          </td>
+          <td>
+        <button id="pu2" class="pulocked" onclick="buyPU(2)">
+          Building cost scaling 1.1x <br> Cost: 3 b
+        </button>
+          </td>
+          <td>
+        <button id="pu3" class="pulocked" onclick="buyPU(3)">
+          Banks are more powerful based on Incrementers bought <br> Cost: 5 b <br> Currently: x
+        </button>
+          </td>
+          <td>
+        <button id="pu4" class="pulocked" onclick="buyPU(4)">
+          Unlock the Incrementer Autobuyer <br> Cost: 5 b
+        </button>
+          </td>
+          <td>
+        <button id="pu5" class="pulocked" onclick="buyPU(5)">
+          Gain 2x more b <br> Cost: 10 b
+        </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+        <button id="pu6" class="pulocked" onclick="buyPU(6)">
+          Unlock the Worker Autobuyer <br> Cost: 15 b
+        </button>
+          </td>
+          <td>
+        <button id="pu7" class="pulocked" onclick="buyPU(7)">
+          Unlock the Bank Autobuyer <br> Cost: 20 b
+        </button>
+          </td>
+          <td>
+        <button id="pu8" class="pulocked" onclick="buyPU(8)">
+          Incrementers are more powerful based on Workers bought <br> Cost: 30 b <br> Currently: x
+        </button>
+          </td>
+          <td>
+        <button id="pu9" class="pulocked" onclick="buyPU(9)">
+          Unlock Auto-Prestige <br> Cost: 50 b
+        </button>
+          </td>
+          <td>
+        <button id="pu10" class="pulocked" onclick="buyPU(10)">
+          Unlock Derivatives <br> Cost: 50 b
+        </button>
+          </td>
+        </tr>
+      </table>
+      <br><br>
+      <button id="autoprestige" display="game.pu[8] == 1" onclick="toggleAuto(4)">
+        Auto-Prestige: OFF
+      </button><br>
+      <input type="number" id="inputBox" display="game.pu[8] == 1">
+    </div>
+    <br><br><br><br>
+    <div>
+      Version 1.0.0
+    </div>
+    <script>load(); setInterval(save, 10000)</script>
+  </body>
+</html>
