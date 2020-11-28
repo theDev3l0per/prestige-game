@@ -3,33 +3,58 @@ const c = id => document.getElementsByClassName(id)
 const t = id => document.getElementsByTagName(id)
 const D = id => new Decimal(id)
 
-var game = {};
-game.time = 0
-game.tb = 0
-game.points = 0;
-game.incrementers = 1;
-game.workers = 0;
-game.banks = 0;
-game.derivatives = 0; 
-game.dpower = 0;
-game.cost1 = 25;
-game.cost2 = 200;
-game.cost3 = 15000;
-game.cost4 = 100;
-game.tickpart = 0;
-game.tickspeed = 50;
-game.b = 0,
-game.tab = 1;
-game.pu = [0,0,0,0,0,0,0,0,0,0];
-game.puCosts = [1,3,5,5,10,15,20,30,50,50];
-game.x = 1;
-game.automators = [false,false,false,false];
-game.autoprestigeamt = 1;
-game.pps = 0;
-game.prestiges = 0;
-console.log("What are you doing here in the console?");
+const app = new Vue({
+  el: '#app',
+  data: {
+    cost: function(x){
+      switch(x){
+    case 1:
+      return (this.player.pu[1] == 1 ? D(25).times(D(1.1).pow(this.player.incrementers.sub(1))) : D(25).times(D(1.15).pow(D(this.player.incrementers).sub(1))))
+      break
+    case 2:
+      return (this.player.pu[1] == 1 ? D(200).times(D(1.1).pow(this.player.workers)) : D(200).times(D(1.15).pow(this.player.workers)))
+      break
+    case 3:
+      return (this.player.pu[1] == 1 ? D(15000).times(D(1.1).pow(this.player.banks)) : D(15000).times(D(1.15).pow(this.player.banks)))
+      break
+    case 4:
+      return (this.player.pu[1000] == 1 ? D(100).times(D(1.1).pow(this.player.derivatives)) : D(100).times(D(1.15).pow(this.player.derivatives)))
+      break 
+  } 
+    },
+    D: function (){return D()},
+    player: {
+      points: "0",
+      tb: "0",
+      time: "0",
+      incrementers: "1",
+      workers: "0",
+      banks: "0",
+      dpower: "0",
+      tickpart: 0,
+      tickspeed: 50,
+      b: "0",
+      tab: 1,
+      pu: [0,0,0,0,0,0,0,0,0,0],
+      puCosts: [1,3,5,5,10,15,20,30,50,50],
+      automators: [false,false,false,false],
+      autoprestigeamt: 1,
+      pps: "0",
+      prestiges: 0,
+      theme: true,
+      achs: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      tpoints: "0",
+      prestigetime: 0,
+      fastestprestige: 42069,
+      puBought: 0
+    }
+  }
+})
 
-// so we are going to save the game in an object.
+console.log("What are you doing here in the console?");
+$("style").href = app.player.theme ? "style.css" : "dark.css";
+
+// so we are going to save the  in an object.
 
 function showElement(element) { // shows element
   $(element).style.display = "inline";
@@ -40,161 +65,122 @@ function hideElement(element) { // hides element
 } 
 
 function init() { // only run this once 
-  
+  // stopLookingInTheCodeHacker();
 }
 
 init();
 
-var mainGameLoop = window.setInterval(function() { // runs the loop
-  game.tickpart += 50
-  if (game.tickpart>=game.tickspeed) {
-    game.tickpart -= game.tickspeed
-    loop();
-  }
-}, 33);
-
-function loop() { // don't change this stuff unless you know what you're doing
-  game.points += game.incrementers/30*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(game.pu[7]==1 ? Math.log10(game.workers+1)+1 : 1)*(Math.log10(game.dpower+1)+1); //1 per sec 
-  game.points += game.workers/3*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(Math.log10(game.dpower+1)+1); //10 per sec
-  game.points += game.banks*100/3*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(game.pu[2]==1 ? Math.log10(game.incrementers+1)+1 : 1)*(Math.log10(game.dpower+1)+1); //1000 per sec
-  game.dpower += game.derivatives/30
-  game.time += 1/30;
-  game.pps = Math.floor((game.incrementers*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(game.pu[7]==1 ? Math.log10(game.workers+1)+1 : 1)*(Math.log10(game.dpower+1)+1))+(game.workers*10*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(Math.log10(game.dpower+1)+1))+(game.banks*1000*(game.pu[0]==1 ? 2*Math.log10(game.time) : 1)*(game.pu[2]==1 ? Math.log10(game.incrementers+1)+1 : 1)*(Math.log10(game.dpower+1)+1)));
-  $("points").innerHTML = `Points: ${Math.floor(game.points)}`;
-  $("pps").innerHTML = `You are getting ${game.pps} points per second`;
-  $("inc").innerHTML = `Incrementers: ${game.incrementers}`;
-  $("workers").innerHTML = `Workers: ${game.workers}`;
-  $("banks").innerHTML = `Banks: ${game.banks}`;
-  $("derivatives").innerHTML = `Derivatives: ${game.derivatives}`;
-  $("incbuy").innerHTML = `Buy an incrementer for ${game.cost1} points`;
-  $("workerbuy").innerHTML = `Buy a worker for ${game.cost2} points`;
-  $("bankbuy").innerHTML = `Buy a bank for ${game.cost3} points`;
-  $("derivativebuy").innerHTML = `Buy a derivative for ${game.cost4} b`;
-  $("dpower").innerHTML = `You have ${Math.floor(game.dpower)} Derivative Power, giving a ${Math.round(Math.log10(game.dpower+1)+1)}x multiplier to point production`
-  $("prestige").innerHTML = `Prestige for ${Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1))+1} b`
-  $("b").innerHTML = `You have ${game.b} b`
-  $("pu1").innerHTML = `Gain a multiplier to point production based on time played <br> Cost: 1 b <br> Currently: ${Math.round(2*Math.log10(game.time))}x`
-  $("pu3").innerHTML = `Banks are more powerful based on Incrementers bought <br> Cost: 5 b <br> Currently: ${Math.round(Math.log10(game.incrementers+1)+1)}x`
-  $("pu8").innerHTML = `Incrementers are more powerful based on Workers bought <br> Cost: 30 b <br> Currently: ${Math.round(Math.log10(game.workers+1)+1)}x`
-  $("info").innerHTML = `You have a total of ${game.incrementers+game.workers+game.banks} buildings.<br>You have collected a total of ${game.tb} b.<br>You have prestiged ${game.prestiges} times.<br>You have played this game for ${Math.floor(game.time)} seconds.`
-  $("auto1").innerHTML = `Auto: ${game.automators[0] ? "ON" : "OFF"}`;
-  $("auto2").innerHTML = `Auto: ${game.automators[1] ? "ON" : "OFF"}`;
-  $("auto3").innerHTML = `Auto: ${game.automators[2] ? "ON" : "OFF"}`;
-  $("autoprestige").innerHTML = `Auto-Prestige: ${game.automators[3] ? "ON" : "OFF"}`;
-  game.autoprestigeamt = $("inputBox").value;
-
-  Array.from(document.querySelectorAll("body *")).forEach(elem => {
-    if (!elem.getAttribute("display")) return elem;
-    elem.style.display = eval(elem.getAttribute("display"))
-      ? "inline-block"
-      : "none";
-  });
-  
-  game.x += 1;
-  if (game.x >= 11){
-    game.x = 1;
-  }
-  if(game.b >= game.puCosts[game.x-1] && game.pu[game.x-1] == 0){
-    $("pu"+(game.x)).className = "pubuyable";
-  }
-  if(game.b < game.puCosts[game.x-1] && game.pu[game.x-1] == 0){
-    $("pu"+(game.x)).className = "pulocked";
-  }
-  if(game.pu[game.x-1] == 1){
-    $("pu"+(game.x)).className = "pubought";
-  }
-  
-  if(game.points >= game.cost1){
-    $("incbuy").className = "buyable";
-  }else{
-    $("incbuy").className = "buyableLocked";
-  }
-  if(game.points >= game.cost2){
-    $("workerbuy").className = "buyable";
-  }else{
-    $("workerbuy").className = "buyableLocked";
-  }
-  if(game.points >= game.cost3){
-    $("bankbuy").className = "buyable";
-  }else{
-    $("bankbuy").className = "buyableLocked";
-  }
-  if(game.b >= game.cost4){
-    $("derivativebuy").className = "buyable";
-  }else{
-    $("derivativebuy").className = "buyableLocked";
-  }
-  
-  if(game.automators[2] == true){
-    var ret = false;
-    if (game.points > game.cost3){
-      game.points -= game.cost3;
-      game.banks += 1;
-      game.cost3 = game.pu[1]==1 ? Math.round(game.cost3*1.1) : Math.round(game.cost3*1.15);
-      ret = true;
-    }
-  }
-  if(game.automators[1] == true){
-    var ret = false;
-    if (game.points > game.cost2){
-      game.points -= game.cost2;
-      game.workers += 1;
-      game.cost2 = game.pu[1]==1 ? Math.round(game.cost2*1.1) : Math.round(game.cost2*1.15);
-      ret = true;
-    }
-  }
-  if(game.automators[0] == true){
-    var ret = false;
-    if (game.points > game.cost1){
-      game.points -= game.cost1;
-      game.incrementers += 1;
-      game.cost1 = game.pu[1]==1 ? Math.round(game.cost1*1.1) : Math.round(game.cost1*1.15);
-      ret = true;
-    }
-  }
-  if(game.automators[3] == true){
-    if(Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1))+1 >= game.autoprestigeamt){
-      prestige();
-    }
-  }
+function cost(x) {
+  switch(x){
+    case 1:
+      return (app.player.pu[1] == 1 ? D(25).times(D(1.1).pow(D(app.player.incrementers).sub(D(1))).floor()) : D(25).times(D(1.15).pow(D(app.player.incrementers).sub(D(1))).floor()))
+      break //because you start with 1 of them
+    case 2:
+      return (app.player.pu[1] == 1 ? D(200).times(D(1.1).pow(app.player.workers).floor()) : D(200).times(D(1.15).pow(app.player.workers).floor()))
+      break
+    case 3:
+      return (app.player.pu[1] == 1 ? D(15000).times(D(1.1).pow(app.player.banks).floor()) : D(15000).times(D(1.15).pow(app.player.banks).floor()))
+      break
+    case 4:
+      return (app.player.pu[1000] == 1 ? D(100).times(D(1.1).pow(app.player.derivatives).floor()) : D(100).times(D(1.15).pow(app.player.derivatives).floor()))
+      break 
+  } 
 }
 
-function tabSwitch(x) {
-   game.tab = x;
+var mainGameLoop = window.setInterval(function() { // runs the loop
+  app.player.tickpart += 50
+  if (app.player.tickpart>=app.player.tickspeed) {
+    app.player.tickpart -= app.player.tickspeed
+    loop();
+  }
+}, (100/3));
+
+function loop() { // don't change this stuff unless you know what you're doing
+// got it, ok get started on pps, and ill fix the game loop while you do that, based on that.
+  app.player.dpower = D(app.player.dpower).add(D(app.player.derivatives).div(30))
+  app.player.pps = D(D(app.player.incrementers).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1).times(app.player.pu[7] == 1 ? D(app.player.workers).add(1).root(2).add(1).times(3) : 1)).add(D(app.player.workers).times(10).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1)).add(D(app.player.banks).times(1000).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1).times(app.player.pu[2] == 1 ? D(app.player.incrementers).add(1).log(10).add(1) : 1)).times(D(app.player.dpower).add(1).log(10).add(1)) //incrementers*timeMult*workerMult+workers*timeMult+banks*timeMult*increMult whats the formula for the points per second as of rn, with all the upgrades included?
+  app.player.points = D(app.player.points).add(D(app.player.pps.div(30)))
+  app.player.tpoints = D(app.player.tpoints).add(D(app.player.pps))
+  app.player.time = D(app.player.time).add(1/30)
+  app.player.prestigetime += 1/30;
+  app.player.tb = new Decimal(app.player.tb)
+  app.player.banks = new Decimal(app.player.banks)
+  app.player.incrementers = new Decimal(app.player.incrementers)
+  app.player.workers = new Decimal(app.player.workers)
+  app.player.b = new Decimal(app.player.b)
+  
+  const conditions = [
+    "D(app.player.incrementers).gte(2)",
+    "D(app.player.points).gte(100)",
+    "D(app.player.workers).gte(1)",
+    "D(app.player.banks).gte(1)",
+    "D(app.player.incrementers).add(app.player.workers).add(app.player.banks).gte(30)",
+    "D(app.player.points).gte(100000)",
+    
+  ]
+  for(const i in conditions) {
+    //if (eval(conditions[i])) app.player.achs[i] = 1
+  }
+  if (D(app.player.incrementers).gte(2)) app.player.achs[0] = 1;
+  if (D(app.player.points).gte(100)) app.player.achs[1] = 1;
+  if (D(app.player.workers).gte(1)) app.player.achs[2] = 1;
+  if (D(app.player.banks).gte(1)) app.player.achs[3] = 1;
+  if (D(app.player.incrementers).add(app.player.workers).add(app.player.banks).gte(30)) app.player.achs[4] = 1;
+  if (D(app.player.points).gte(100000)) app.player.achs[5] = 1; // you put the data in
+  if (D(app.player.pps).gte(10000)) app.player.achs[6] = 1;
+  if (D(app.player.points).gte(1000000)) app.player.achs[9] = 1;
+  if (D(app.player.derivatives).gte(1)) app.player.achs[13] = 1;
+  if (D(app.player.points).gte(1000000000)) app.player.achs[15] = 1;
+  if (app.player.pu[8] == 1) app.player.achs[12] = 1;
+  if (app.player.automators[0] == true && app.player.automators[1] == true && app.player.automators[2] == true) app.player.achs[11] = 1;
+  if (app.player.puBought >= 2) app.player.achs[8] = 1;
+  if (app.player.automators[2]){
+    var ret = false;
+    buyInc(3)
+  }
+  if (app.player.automators[1]){
+    var ret = false;
+    buyInc(2)
+  }
+  if (app.player.automators[0]){
+    var ret = false;
+    buyInc(1)
+  }
+  if (app.player.automators[3]){
+    if(D.floor(D.log(app.player.points/100000,2)*(app.player.pu[4]==1 ? 2 : 1)).plus(1).gte( app.player.autoprestigeamt)){
+      prestige();
+    }
+  } 
 }
 
 function buyInc(x) {
   var ret = false
   switch (x) {
     case 1:
-    if (game.points > game.cost1){
-      game.points -= game.cost1;
-      game.incrementers += 1;
-      game.cost1 = game.pu[1]==1 ? Math.round(game.cost1*1.1) : Math.round(game.cost1*1.15);
+    if (D(app.player.points).gte(cost(1))){
+      app.player.points = D(app.player.points).sub(cost(1))
+      app.player.incrementers = D(app.player.incrementers).add(1)
       ret = true
     }
     break;
     case 2:
-    if (game.points > game.cost2){
-      game.points -= game.cost2;
-      game.workers += 1;
-      game.cost2 = game.pu[1]==1 ? Math.round(game.cost2*1.1) : Math.round(game.cost2*1.15);
+    if (D(app.player.points).gte(cost(2))){
+      app.player.points = D(app.player.points).sub(cost(2));
+      app.player.workers = D(app.player.workers).add(1)
       ret = true
     }
     break;
     case 3:
-    if (game.points > game.cost3){
-      game.points -= game.cost3;
-      game.banks += 1;
-      game.cost3 = game.pu[1]==1 ? Math.round(game.cost3*1.1) : Math.round(game.cost3*1.15);
+    if (D(app.player.points).gte(cost(3))){
+      app.player.points = D(app.player.points).sub(cost(3));
+      app.player.banks = D(app.player.banks).add(1);
       ret = true
     }
     break;
     case 4:
-      if (game.b > game.cost4) {
-      game.b -= game.cost4
-      game.derivatives += 1; 
-      game.cost4 = Math.round(game.cost4*1.15);
+      if (D(app.player.b).gte(cost(4))) {
+      app.player.b = D(app.player.b).sub(cost(4));
+      app.player.derivatives = D(app.player.deriviatives).add(1) 
       }
   } 
   return ret
@@ -216,45 +202,77 @@ function maxAll(x) {
 }
 
 function buyPU(x) {
-    if(game.b >= game.puCosts[x-1] && game.pu[x-1] == 0){
-      game.b -= game.puCosts[x-1];
-      game.pu[x-1] = 1;
+    if(D(app.player.b).gte(app.player.puCosts[x-1]) && app.player.pu[x-1] == 0){
+      app.player.b = D(app.player.b).sub(app.player.puCosts[x-1]);
+      app.player.pu[x-1] = 1;
+      app.player.puBought += 1;
     }
 }
 
 function prestige() {
-    game.b += Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1)+1);//what this formula is wrong it says log2(points*2/100000) instead of log2(points/100000)*2
-    game.tb += Math.floor(Math.log2(game.points/100000)*(game.pu[4]==1 ? 2 : 1)+1); //bruq I fixed it
-    game.prestiges += 1;
-    game.points = 0;
-    game.incrementers = 1;
-    game.workers = 0;
-    game.banks = 0;
-    game.derivatives = 0; 
-    game.cost1 = 25;
-    game.cost2 = 200;
-    game.cost3 = 15000;
-    game.tickpart = 0;
-    game.tickspeed = 50;
+  if(D(app.player.points).gte(100000)){
+    if(app.player.prestigetime < app.player.fastestprestige){app.player.fastestprestige = app.player.prestigetime}
+    app.player.prestigetime = 0;
+    if ((D(app.player.points).div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor().gte(20))) app.player.achs[14] = 1;
+    app.player.b = app.player.b.add(app.player.points.div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor());//what this formula is wrong it says log2(points*2/100000) instead of log2(points/100000)*2
+    app.player.tb = D(app.player.tb).add(D(app.player.points).div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor()); //bruq I fixed it
+    if (D(app.player.incrementers).lt(2)) app.player.achs[7] = 1;
+    if (D(app.player.banks).lt(1)) app.player.achs[10] = 1;
+    app.player.prestiges += 1;
+    app.player.points = "0";
+    app.player.incrementers = "1";
+    app.player.workers = "0";
+    app.player.banks = "0";
+    app.player.tickpart = 0;
+    app.player.tickspeed = 50;
+  }
 }
 
 function toggleAuto(x) {
   switch (x) {
     case 1:
-     game.automators[0] = !game.automators[0]
-     $("auto1").innerHTML = `Auto: ${game.automators[0] ? "ON" : "OFF"}`;
+     app.player.automators[0] = !app.player.automators[0]
     break;
     case 2:
-      game.automators[1] = !game.automators[1]
-      $("auto2").innerHTML = `Auto: ${game.automators[1] ? "ON" : "OFF"}`;
+      app.player.automators[1] = !app.player.automators[1]
     break;
     case 3:
-      game.automators[2] = !game.automators[2]
-      $("auto3").innerHTML = `Auto: ${game.automators[2] ? "ON" : "OFF"}`;
+      app.player.automators[2] = !app.player.automators[2]
     break;
     case 4:
-      game.automators[3] = !game.automators[3]
-      $("autoprestige").innerHTML = `Auto-Prestige: ${game.automators[3] ? "ON" : "OFF"}`;
+      app.player.automators[3] = !app.player.automators[3]
     break;
   }
 }
+
+function switchTheme () {
+  app.player.theme = !app.player.theme;
+  $("style").href = app.player.theme ? "style.css" : "dark.css";
+}
+
+document.addEventListener("keydown", function onEvent(event) {
+  switch (event.key) {
+    case "m": // max all
+      if(D(app.player.tb).gt(0)){maxAll()}
+      break
+    case "1":
+      buyInc(1)
+      break
+    case "2":
+      buyInc(2)
+      break
+    case "3":
+      buyInc(3)
+      break
+    case "4":
+      buyInc(4)
+      break
+    case "p":
+      prestige()
+      break
+    case "a":
+      if(app.player.pu[3] == 1){app.player.automators[0] = !app.player.automators[0]}
+      if(app.player.pu[5] == 1){app.player.automators[1] = !app.player.automators[1]}
+      if(app.player.pu[6] == 1){app.player.automators[2] = !app.player.automators[2]}
+  }
+});

@@ -13,40 +13,53 @@ function loopAssign(x, y) {
 }
 
 function save() {
-  if (typeof localStorage.game == "undefined") localStorage.game = JSON.stringify(game)
-  localStorage.game = JSON.stringify(game)
+  if (typeof localStorage.game == "undefined") localStorage.game = JSON.stringify(app.player)
+  localStorage.game = JSON.stringify(app.player)
 }
 
 function load() {
-  if (typeof localStorage.game != "undefined") JSON.stringify(loopAssign(game, JSON.parse(localStorage.game)))
+  if (typeof localStorage.game != "undefined") app.player = loopAssign(app.player, JSON.parse(localStorage.game))
+}
+
+function importSave() {
+  x = window.prompt("Please enter your save here")
+  if (typeof localStorage.game != "undefined") app.player = loopAssign(app.player, JSON.parse(window.atob(x))) //this function doesn't work
+  save()
+}
+
+function exportSave() {
+   navigator.clipboard.writeText(window.btoa(JSON.stringify(app.player)))
+  
+  window.confirm("you save code has been copied to your clipboard")
 }
 
 function reset() {
   if (confirm("Are you sure you want to reset?")) {
-    game = {};
-    game.time = 0
-    game.tb = 0
-    game.points = 0;
-    game.incrementers = 1;
-    game.workers = 0;
-    game.banks = 0;
-    game.derivatives = 0; 
-    game.dpower = 0;
-    game.cost1 = 25; 
-    game.cost2 = 200;
-    game.cost3 = 15000;
-    game.cost4 = 100;
-    game.tickpart = 0;
-    game.tickspeed = 50;
-    game.b = 0,
-    game.tab = 1;
-    game.pu = [0,0,0,0,0,0,0,0,0,0];
-    game.puCosts = [1,3,5,5,10,15,20,30,50,50];
-    game.x = 1;
-    game.automators = [false,false,false,false];
-    game.autoprestigeamt = 1;
-    game.pps = 0;
-    game.prestiges = 0;
+    app.player = {
+      points: "0",
+      tb: "0",
+      time: 0,
+      incrementers: "1",
+      workers: "0",
+      banks: "0",
+      dpower: "0",
+      tickpart: 0,
+      tickspeed: 50,
+      b: "0",
+      tab: 1,
+      pu: [0,0,0,0,0,0,0,0,0,0],
+      puCosts: [1,3,5,5,10,15,20,30,50,50],
+      automators: [false,false,false,false],
+      autoprestigeamt: 1,
+      pps: "0",
+      prestiges: 0,
+      theme: true,
+      achs: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      tpoints: "0",
+      prestigetime: 0,
+      fastestprestige: 42069,
+      puBought: 0
+    };
     save();
     load();
   }
