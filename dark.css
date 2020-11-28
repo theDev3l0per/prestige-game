@@ -1,14 +1,22 @@
 body {
   font-family: helvetica, arial, sans-serif, typewriter;
   margin: 2em;
+  background-color: black;
 }
 
 button {
   border-radius: 5px;
+  background-color: gray;
+  color: white;
+}
+
+div {
+  color: white;
 }
 
 #points {
   font-size: 25px;
+  text-shadow: 0px 0px 7px white;
 }
 
 .tab {
@@ -17,8 +25,8 @@ button {
 }
 
 .tab:hover {
-  color: white;
-  background-color: gray;
+  color: gray;
+  background-color: black;
 }
 
 #tab5, .prestige {
@@ -42,9 +50,9 @@ button {
 .pulocked {
   height: 100px;
   width: 150px;
-  color: black;
-  background-color: #aaaaaa;
   border-color: red;
+  color: white;
+  background-color: black;
   transition-duration: 0.2s;
 }
 
@@ -69,7 +77,7 @@ button {
 .buyable {
   border-color: green;
   color: green;
-  background-color: #dddddd;
+  background-color: black;
   transition-duration: 0.2s;
 }
 
@@ -80,8 +88,8 @@ button {
 
 .buyableLocked {
   border-color: red;
-  color: black;
-  background-color: #aaaaaa;
+  color: white;
+  background-color: black;
   transition-duration: 0.2s;
 }
 
@@ -94,6 +102,10 @@ button {
   color: cyan;
   background-color: blue;
   border-color: blue;
+}
+
+#b {
+  text-shadow: 0px 0px 14px #006db6;
 }
 
 .ach {
@@ -115,7 +127,7 @@ button {
 }
 
 #news {
-  color: #000000;
+  color: white;
   position: relative;
   display: inline-block;
   font-size: 15px;
@@ -124,7 +136,7 @@ button {
 }
 
 #game {
-  border: 2px solid black;
+  border: 2px solid white;
   padding: 2px;
   width: 75%;
   overflow: hidden;
