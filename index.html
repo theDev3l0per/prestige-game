@@ -28,9 +28,9 @@
     <div id="pps">
       You are getting {{player.pps.floor()}} points per second
     </div>
-    <div id="b" style="color: #006bd6" v-if="D(player.tb).gte(0)">
+    <div id="b" style="color: #006bd6" v-if="player.tb.gt(0)">
       You have {{player.b}} b
-    </div><br v-if="D(player.tb).gte(0)">
+    </div><br v-if="player.tb.gt(0)">
     <button id="tab1" class="tab" @click="player.tab=1">
       Production
     </button>
@@ -47,9 +47,9 @@
       Prestige
     </button><br><br>
     <div id="tab1disp" v-if="player.tab == 1">
-    <button v-if="D(player.tb).gte(0)" onclick="maxAll()">
+    <button v-if="player.tb.gt(0)" onclick="maxAll()">
       Max All (M)
-    </button><br v-if="D(player.tb).gte(0)"><br v-if="D(player.tb).gte(0)">
+    </button><br v-if="player.tb.gt(0)"><br v-if="player.tb.gt(0)">
     <div id="inc">
       Incrementers: {{player.incrementers}}
     </div>
@@ -218,54 +218,54 @@
       <table>
         <tr>
           <td>
-        <button id="pu1" :class="{pulocked: (D(player.b).lt(player.puCosts[0]) && player.pu[0] == 0), pubuyable: (player.b.gte(player.puCosts[0]) && player.pu[0] == 0), pubought: (player.pu[0] == 1)}" onclick="buyPU(1)">
+        <button id="pu1" :class="{pulocked: (player.b.lt(player.puCosts[0]) && player.pu[0] == 0), pubuyable: (player.b.gte(player.puCosts[0]) && player.pu[0] == 0), pubought: (player.pu[0] == 1)}" onclick="buyPU(1)">
           Gain a multiplier to point production based on time played <br> Cost: 1 b <br> Currently: {{player.time.add(1).log(10).add(1).times(2).toFixed(3)}}x
         </button>
           </td>
           <td>
-        <button id="pu2" :class="{pulocked: (D(player.b).lt(player.puCosts[1]) && player.pu[1] == 0), pubuyable: (player.b.gte(player.puCosts[1]) && player.pu[1] == 0), pubought: (player.pu[1] == 1)}" onclick="buyPU(2)">
+        <button id="pu2" :class="{pulocked: (player.b.lt(player.puCosts[1]) && player.pu[1] == 0), pubuyable: (player.b.gte(player.puCosts[1]) && player.pu[1] == 0), pubought: (player.pu[1] == 1)}" onclick="buyPU(2)">
           Building cost scaling 1.1x <br> Cost: 3 b
         </button>
           </td>
           <td>
-        <button id="pu3" :class="{pulocked: (D(player.b).lt(player.puCosts[2]) && player.pu[2] == 0), pubuyable: (player.b.gte(player.puCosts[2]) && player.pu[2] == 0), pubought: (player.pu[2] == 1)}" onclick="buyPU(3)">
+        <button id="pu3" :class="{pulocked: (player.b.lt(player.puCosts[2]) && player.pu[2] == 0), pubuyable: (player.b.gte(player.puCosts[2]) && player.pu[2] == 0), pubought: (player.pu[2] == 1)}" onclick="buyPU(3)">
           Banks are more powerful based on Incrementers bought <br> Cost: 5 b <br> Currently: {{player.incrementers.add(1).log(10).add(1).toFixed(3)}}x
         </button>
           </td>
           <td>
-        <button id="pu4" :class="{pulocked: (D(player.b).lt(player.puCosts[3]) && player.pu[3] == 0), pubuyable: (player.b.gte(player.puCosts[3]) && player.pu[3] == 0), pubought: (player.pu[3] == 1)}" onclick="buyPU(4)">
+        <button id="pu4" :class="{pulocked: (player.b.lt(player.puCosts[3]) && player.pu[3] == 0), pubuyable: (player.b.gte(player.puCosts[3]) && player.pu[3] == 0), pubought: (player.pu[3] == 1)}" onclick="buyPU(4)">
           Unlock the Incrementer Autobuyer <br> Cost: 5 b
         </button>
           </td>
           <td>
-        <button id="pu5" :class="{pulocked: (D(player.b).lt(player.puCosts[4]) && player.pu[4] == 0), pubuyable: (player.b.gte(player.puCosts[4]) && player.pu[4] == 0), pubought: (player.pu[4] == 1)}" onclick="buyPU(5)">
+        <button id="pu5" :class="{pulocked: (player.b.lt(player.puCosts[4]) && player.pu[4] == 0), pubuyable: (player.b.gte(player.puCosts[4]) && player.pu[4] == 0), pubought: (player.pu[4] == 1)}" onclick="buyPU(5)">
           Gain 2x more b <br> Cost: 10 b
         </button>
           </td>
         </tr>
         <tr>
           <td>
-        <button id="pu6" :class="{pulocked: (D(player.b).lt(player.puCosts[5]) && player.pu[5] == 0), pubuyable: (player.b.gte(player.puCosts[5]) && player.pu[5] == 0), pubought: (player.pu[5] == 1)}" onclick="buyPU(6)">
+        <button id="pu6" :class="{pulocked: (player.b.lt(player.puCosts[5]) && player.pu[5] == 0), pubuyable: (player.b.gte(player.puCosts[5]) && player.pu[5] == 0), pubought: (player.pu[5] == 1)}" onclick="buyPU(6)">
           Unlock the Worker Autobuyer <br> Cost: 15 b
         </button>
           </td>
           <td>
-        <button id="pu7" :class="{pulocked: (D(player.b).lt(player.puCosts[6]) && player.pu[6] == 0), pubuyable: (player.b.gte(player.puCosts[6]) && player.pu[6] == 0), pubought: (player.pu[6] == 1)}" onclick="buyPU(7)">
+        <button id="pu7" :class="{pulocked: (player.b.lt(player.puCosts[6]) && player.pu[6] == 0), pubuyable: (player.b.gte(player.puCosts[6]) && player.pu[6] == 0), pubought: (player.pu[6] == 1)}" onclick="buyPU(7)">
           Unlock the Bank Autobuyer <br> Cost: 20 b
         </button>
           </td>
           <td>
-        <button id="pu8" style="font-size: 11px" :class="{pulocked: (D(player.b).lt(player.puCosts[7]) && player.pu[7] == 0), pubuyable: (player.b.gte(player.puCosts[7]) && player.pu[7] == 0), pubought: (player.pu[7] == 1)}" onclick="buyPU(8)">
+        <button id="pu8" style="font-size: 11px" :class="{pulocked: (player.b.lt(player.puCosts[7]) && player.pu[7] == 0), pubuyable: (player.b.gte(player.puCosts[7]) && player.pu[7] == 0), pubought: (player.pu[7] == 1)}" onclick="buyPU(8)">
           Incrementers are 3x more effective, and Incrementers are more powerful based on Workers bought <br> Cost: 30 b <br> Currently: {{player.workers.add(1).sqrt().mul(3).toFixed(3)}}x
         </button>
           </td>
           <td>
-        <button id="pu9" :class="{pulocked: (D(player.b).lt(player.puCosts[8]) && player.pu[8] == 0), pubuyable: (player.b.gte(player.puCosts[8]) && player.pu[8] == 0), pubought: (player.pu[8] == 1)}" onclick="buyPU(9)">
+        <button id="pu9" :class="{pulocked: (player.b.lt(player.puCosts[8]) && player.pu[8] == 0), pubuyable: (player.b.gte(player.puCosts[8]) && player.pu[8] == 0), pubought: (player.pu[8] == 1)}" onclick="buyPU(9)">
           Unlock Auto-Prestige <br> Cost: 50 b
         </button>
           </td>
           <td>
-        <button id="pu10" :class="{pulocked: (D(player.b).lt(player.puCosts[9]) && player.pu[9] == 0), pubuyable: (player.b.gte(player.puCosts[9]) && player.pu[9] == 0), pubought: (player.pu[9] == 1)}" onclick="buyPU(10)">
+        <button id="pu10" :class="{pulocked: (player.b.lt(player.puCosts[9]) && player.pu[9] == 0), pubuyable: (player.b.gte(player.puCosts[9]) && player.pu[9] == 0), pubought: (player.pu[9] == 1)}" onclick="buyPU(10)">
           Unlock Derivatives <br> Cost: 50 b
         </button>
           </td>
@@ -279,7 +279,7 @@
     </div>
     <br><br><br><br>
     <div>
-      Version 1.1.0
+      Version 1.1.1
     </div>
     </div>
     <script src="js/game.js"></script>

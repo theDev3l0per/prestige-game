@@ -38,7 +38,7 @@ const app = new Vue({
       pu: [0,0,0,0,0,0,0,0,0,0],
       puCosts: [1,3,5,5,10,15,20,30,50,50],
       automators: [false,false,false,false],
-      autoprestigeamt: 1,
+      autoprestigeamt: "1",
       pps: "0",
       prestiges: 0,
       theme: true,
@@ -100,7 +100,7 @@ function loop() { // don't change this stuff unless you know what you're doing
   app.player.dpower = D(app.player.dpower).add(D(app.player.derivatives).div(30))
   app.player.pps = D(D(app.player.incrementers).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1).times(app.player.pu[7] == 1 ? D(app.player.workers).add(1).root(2).add(1).times(3) : 1)).add(D(app.player.workers).times(10).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1)).add(D(app.player.banks).times(1000).times(app.player.pu[0] == 1 ? D(app.player.time).add(1).log(10).add(1).times(2) : 1).times(app.player.pu[2] == 1 ? D(app.player.incrementers).add(1).log(10).add(1) : 1)).times(D(app.player.dpower).add(1).log(10).add(1)) //incrementers*timeMult*workerMult+workers*timeMult+banks*timeMult*increMult whats the formula for the points per second as of rn, with all the upgrades included?
   app.player.points = D(app.player.points).add(D(app.player.pps.div(30)))
-  app.player.tpoints = D(app.player.tpoints).add(D(app.player.pps))
+  app.player.tpoints = D(app.player.tpoints).add(D(app.player.pps.div(30)))
   app.player.time = D(app.player.time).add(1/30)
   app.player.prestigetime += 1/30;
   app.player.tb = new Decimal(app.player.tb)
@@ -147,7 +147,7 @@ function loop() { // don't change this stuff unless you know what you're doing
     buyInc(1)
   }
   if (app.player.automators[3]){
-    if(D.floor(D.log(app.player.points/100000,2)*(app.player.pu[4]==1 ? 2 : 1)).plus(1).gte( app.player.autoprestigeamt)){
+    if(app.player.points.div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor().gte(app.player.autoprestigeamt)){
       prestige();
     }
   } 
@@ -180,7 +180,7 @@ function buyInc(x) {
     case 4:
       if (D(app.player.b).gte(cost(4))) {
       app.player.b = D(app.player.b).sub(cost(4));
-      app.player.derivatives = D(app.player.deriviatives).add(1) 
+      app.player.derivatives = D(app.player.derivatives).add(1) 
       }
   } 
   return ret
@@ -215,7 +215,7 @@ function prestige() {
     app.player.prestigetime = 0;
     if ((D(app.player.points).div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor().gte(20))) app.player.achs[14] = 1;
     app.player.b = app.player.b.add(app.player.points.div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor());//what this formula is wrong it says log2(points*2/100000) instead of log2(points/100000)*2
-    app.player.tb = D(app.player.tb).add(D(app.player.points).div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor()); //bruq I fixed it
+    app.player.tb = app.player.tb.add(app.player.points.div(100000).log(2).times(app.player.pu[4]==1 ? 2 : 1).add(1).floor()); //bruq I fixed it
     if (D(app.player.incrementers).lt(2)) app.player.achs[7] = 1;
     if (D(app.player.banks).lt(1)) app.player.achs[10] = 1;
     app.player.prestiges += 1;

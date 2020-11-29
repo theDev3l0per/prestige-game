@@ -218,7 +218,7 @@ newsArray = [
     ["Anti-Avengers: Endgame is the worst movie to ever exist. It has been given a -1% on Rotten Tomatoes.",true,"a214"],
     ["1.79e308 NO SCOPED",true,"a215"],
     ["Don't you hate when you suggest a bunch of news tickers and they never get added? Oh wait...this isn't relatable to anyone",true,"a216"],
-    ["&#729;u&#653;op-&#477;p&#7433;sd&#8745; &#477;&#613;&#647; o&#647;u&#7433; &#647;u&#477;&#653; &#647;&#7433; &#477;q&#654;&#592;W &#191;&#647;x&#477;&#647; &#477;&#613;&#647; o&#647; p&#477;u&#477;dd&#592;&#613; &#647;&#592;&#613;M",true,"a217"],
+    ["˙˙˙sᴉɥʇ ʇnoqɐ ʇɥƃᴉɹ lǝǝɟ ʇ,usǝop ƃuᴉɥʇǝɯos 'ʎǝH",true,"a217"],
     ["No microtransactions whatsoever! What a surprise!",true,"a218"],
     ["One of our reporters said to a man, 'How much time did it take for you to get 'Billionaire' on your first run?'. The man replied, 'Yes.'.",true,"a219"],
     ["How am I meant to get pregananant.?",true,"a220"],
@@ -275,7 +275,18 @@ newsArray = [
     ["The reason why there aren't many long news tickers is because randomtuba didn't really decide to make a bunch of long news tickers...until now.",true,"a271"],
     ["Pardon me, coming through!",true,"a272"],
     ["Going horizontal is fun! Weeeeeeeeeeeeee!",true,"a273"],
-    ["I was planning to make 300 of these before the update, but I ran out of ideas.",true,"a274"]
+    ["I was planning to make 1,000,000 of these before the update, but I ran out of ideas.",true,"a274"],
+    ["wait, what are we supposed to be putting here again? why do people even read these? are you telling me that... all this time... all this time you could've just put nothing here, and people would start listening?! so that's why people didn't care when we put an intricate news ticker here! oh, dang it, and now we've lost our players. guess we need to release the update in six hours, and not five. oh, the irony! ...and my heart! all this time the lazy people have gotten over the intricate news ticker makers! and even if they watched they would stop watching before the end! i'm going to go cry now, this news ticker has now been abandoned, good day!",true,"a275"],
+    ["Several people are typing...",true,"a276"],
+    ["Thanks, Obama.",true,"a277"],
+    ["oh wait wrong discord server",true,"a278"],
+    ["I once went into the console and I got a scary message: 'What are you doing here in the console?'",true,"a279"],
+    ["never gonna give you up never gonna let you down never gonna run around and desert you *rickroll music plays* never gonna make you cry never gonna say goodbye never gonna tell a lie and hurt you *more rickroll music plays*",true,"a280"],
+    ["This ticker is sponsored by Skillshare",true,"a281"],
+    ["tick... tick... tick... wait why are we waiting here again? why are we even... well never mind. i think these words are just sponsored by Raid: Shadow Legends and to make the thing longer... wait... what thing... i have confuzzeled myself yet again...",true,"a282"],
+    ["Fun fact: Masks are actually gay",true,"a283"],
+    ["'someone to die? hehewoowowowowow' - abraham lincoln",true,"a284"],
+    ["'fucking eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' -unp©gged™",true,"a285"]
 ];}
 
 var s;
