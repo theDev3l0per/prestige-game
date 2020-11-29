@@ -119,7 +119,7 @@ newsArray = [
     ["Will Tuba copy Distance Incremental next??? No one knows!",true,"a115"],
     ["Putting more exclamation marks at the end of your sentence doesn't make it have more emphasis, instead, it makes you look stupid",true,"a116"],
     ["The 4th building will be [REDACTED]. It will cost NaNeNaN^NaNeNaN points.",true,"a117"],
-    ["If I'm not mistaken, there are currently 274 news tickers.",true,"a118"], //If I'm not mistaken 2
+    ["If I'm not mistaken, there are currently 285 news tickers.",true,"a118"], //If I'm not mistaken 2
     ["Jadronize coming 2029",true,"a119"],
     ["In the beginning, there was nothingness. There was white space, and the only message there was was 'Welcome to Prestige Game'. It was in bold text, and it looked really dumb. But then a rift appeared, and randomtuba emerged from the rift. He created some cool shit like Points, Incrementers, Workers, and Banks. He made Banks really powerful, so powerful that it crashed the fucking stock market. But randomtuba didn't care, he was too busy fucking up the game until unpingabot had to fix the absolute doodoo water that randomtuba created. Then randomtuba made 'b' that could be used for cool stuff like upgrades and these super expensive things called 'Derivatives'. He also created some useless automation crap, whatever that means. Then randomtuba said he was done, and he created Google Chrome so unpingabot could host the Glitch project on GitHub. He called it 'Prestige Game', an unoriginal title for a game that doesn't need to exist. The game? It's a load of shit, 1/10",true,"a120"],
     ["join the discord server or else bad luck for life",true,"a121"],
@@ -158,7 +158,7 @@ newsArray = [
     ["break_your_sanity.js",true,"a154"],
     ["9th dimesion wehn???",true,"a155"],
     ["Esta oración está en español y no agrega nada a este juego.",true,"a156"],
-    ["If I'm not mistaken, the current version number is v1.1.0.",true,"a157"], //If I'm not mistaken 3
+    ["If I'm not mistaken, the current version number is v1.1.2.",true,"a157"], //If I'm not mistaken 3
     ["Anti-Cars 2 a huge hit",true,"a158"],
     ["Timewalls? Well, this game isn't Ordinal Markup, that's what.",true,"a159"],
     ["Go play outside, you should consider taking a break",true,"a160"],
