@@ -10,18 +10,20 @@
   </head>
   
   <body>
+    <script src="./format.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="./break_eternity.js"></script>
     <script src="js/news.js"></script>
+    <script src="js/format.js"></script>
     <div id="game">
-    <div id="news" style="transform: translateX(-2512px); transition: transform 35.33s linear 0s;">Welcome to Prestige Game</div> 
+    <div id="news" style="transform: translateX(-2512px); transition: transform 35.33s linear 0s;" onclick="newscheck()">Welcome to Prestige Game</div> 
     </div>
     <div id="app">
-    <br class="prestige" v-if="player.points.gte(100000)">
-    <button id="prestige" class="prestige" v-if="player.points.gte(100000)" onclick="prestige()">
-      Prestige for {{player.points.div(100000).log(2).times(player.pu[4]==1 ? 2 : 1).add(1).floor()}} b<br>(P) 
+    <br class="prestige" v-if="player.points.gte(100000) || player.tb.gte(1)">
+    <button id="prestige" class="prestige" v-if="player.pointsThisPrestige.gte(100000) || player.tb.gte(1)" onclick="prestige()">
+      Prestige for {{player.points.gte(100000) ? (player.pu[10] ? player.points.div(100000).sqrt().times(player.pu[4] + 1).times(player.pu[19]==1?100:1).floor() : player.points.div(100000).log(2).times(player.pu[4] + 1).add(1).times(1).floor()) : "0"}} b<br>(P) 
     </button><br><br>
-    <div id="points">
+    <div id="points" onclick="app.player.clicks++">
       Points: {{player.points.floor()}}
     </div>
       
@@ -49,9 +51,12 @@
     <div id="tab1disp" v-if="player.tab == 1">
     <button v-if="player.tb.gt(0)" onclick="maxAll()">
       Max All (M)
+    </button>
+    <button v-if="player.tb.gt(0)" onclick="if(app.player.pu[3] == 1){app.player.automators[0] = !app.player.automators[0]}; if(app.player.pu[5] == 1){app.player.automators[1] = !app.player.automators[1]}; if(app.player.pu[6] == 1){app.player.automators[2] = !app.player.automators[2]}">
+      Toggle Autobuyers (A)
     </button><br v-if="player.tb.gt(0)"><br v-if="player.tb.gt(0)">
     <div id="inc">
-      Incrementers: {{player.incrementers}}
+      Incrementers: {{player.incrementers}} {{player.pincrementers.gt(0) ? ` (+${player.pincrementers.floor()})` : ""}}
     </div>
     <button id="incbuy" onclick="buyInc(1)" :class="{buyable:((player.points.gte(cost(1)))), buyableLocked: (!(player.points.gte(cost(1))))}">
       Buy an incrementer for {{cost(1).floor()}} points (1)
@@ -60,7 +65,7 @@
       Auto: {{player.automators[0] ? "ON" : "OFF"}}
     </button><br><br>
     <div id="workers">
-      Workers: {{player.workers}}
+      Workers: {{player.workers}} {{player.pworkers.gt(0) ? ` (+${player.pworkers.floor()})` : ""}}
     </div>
     <button id="workerbuy" onclick="buyInc(2)" :class="{buyable:(player.points.gte(cost(2))), buyableLocked: (!(player.points.gte(cost(2))))}">
       Buy a worker for {{cost(2).floor()}} points (2)
@@ -69,22 +74,34 @@
       Auto: {{player.automators[1] ? "ON" : "OFF"}}
     </button><br><br>
     <div id="banks">
-      Banks: {{player.banks}}
-    </div>
+      Banks: {{player.banks}} {{player.pbanks.gt(0) ? ` (+${player.pbanks.floor()})` : ""}}
+    </div> 
     <button id="bankbuy" onclick="buyInc(3)" :class="{buyable:(player.points.gte(cost(3))), buyableLocked: !(player.points.gte(cost(3)))}">
       Buy a bank for {{cost(3).floor()}} points (3)
     </button>
     <button id="auto3" onclick="toggleAuto(3)" v-if="player.pu[6] == 1">
       Auto: {{player.automators[2] ? "ON" : "OFF"}}
     </button><br><br>
-    <div id="derivatives" v-if="player.pu[9] == 1">
-      Derivatives: {{player.derivatives}}
-    </div>
     <div id="dpower" v-if="player.pu[9] == 1">
-      You have {{player.dpower.floor()}} Derivative Power, giving a {{player.dpower.add(1).log(10).add(1).floor()}}x multiplier to point production
+      You have {{player.dpower.floor()}} Derivative Power, giving a {{player.pu[14] == 1 ? player.dpower.add(1).sqrt().add(1).toFixed(3) : player.dpower.add(1).log(10).add(1).toFixed(3)}}x multiplier to point production
+    </div><br v-if="player.pu[9] == 1"><br v-if="player.pu[9] == 1">
+    <div id="derivatives" v-if="player.pu[9] == 1">
+      Tier 1 Derivatives: {{player.derivatives.floor()}}
     </div>
-    <button id="derivativebuy" onclick="buyInc(4)" :class="{buyable:(player.b.gte(cost(4))), buyableLocked: !(player.b.gte(cost(4)))}" v-if="player.pu[9] == 1">
-      Buy a derivative for {{cost(4).floor()}} b
+    <button v-if="!player.derivatives2.gte(1) && player.pu[9] == 1" id="derivativebuy" onclick="buyInc(4)" :class="{buyable:(player.b.gte(cost(4))), buyableLocked: !(player.b.gte(cost(4)))}">
+      Buy a Tier 1 Derivative for {{cost(4).floor()}} b
+    </button><br><br>
+    <div id="derivatives2" v-if="player.pu[9] == 1">
+      Tier 2 Derivatives: {{player.derivatives2.floor()}}
+    </div>
+    <button v-if="!player.derivatives3.gte(1) && player.pu[9] == 1" id="derivative2buy" onclick="buyInc(5)" :class="{buyable:(player.b.gte(cost(5))), buyableLocked: !(player.b.gte(cost(5)))}">
+      Buy a Tier 2 Derivative for {{cost(5).floor()}} b
+    </button><br><br>
+    <div id="derivatives3" v-if="player.pu[9] == 1">
+      Tier 3 Derivatives: {{player.derivatives3.floor()}}
+    </div>
+    <button id="derivative3buy" v-if="player.pu[9] == 1" onclick="buyInc(6)" :class="{buyable:(player.b.gte(cost(6))), buyableLocked: !(player.b.gte(cost(6)))}">
+      Buy a Tier 3 Derivative for {{cost(6).floor()}} b
     </button><br><br>
     </div>
     <div id="tab2disp" v-if="player.tab == 2">
@@ -108,15 +125,29 @@
       </button>
       <button id="discord" class="discord" onclick="window.location.href = 'https://discord.gg/VxHzjtgdA4';">
         Discord Link
-      </button>
+      </button><br><br>
+      <div>
+        <b><span style="font-size: 20px">Credits</span></b><br>
+        Thanks to these people, Prestige Game wouldn't be what it is.<br>
+        Thanks to unpingabot, gapples2, TheMKeyHolder, and unsoftcapped for adding code to this game to make it better.<br>
+        Thanks to Cosmic47 for actually making the news ticker work and helping me optimize the code for this game.<br>
+        Thanks to Antimatter Dimensions for its news ticker code.<br>
+        Thanks to unpogged and DEMEMZEA for writing the How to Play.<br>
+        Thanks to Dest, DEMEMZEA, Cosmic47, and Satan's Dark Duck for testing the game.<br><br>
+        And thank you, player, for playing this game. I really appreciate it.
+      </div>
     </div>
     <div id="tab3disp" v-if="player.tab == 3">
       <div id="info">
+        <b>General</b><br>
         You have a total of {{player.incrementers.add(player.workers).add(player.banks)}} buildings.<br>
+        You have played this game for {{player.time.floor()}} seconds.<br>
+        You have made a total of {{player.tpoints.floor()}} points.<br><br>
+      </div>
+      <div id="info2" v-if="player.tb.gt(0)">
+        <b><span style="color: #006db6">Prestige</span></b><br>
         You have collected a total of {{player.tb}} b.<br>
         You have prestiged {{player.prestiges}} times.<br>
-        You have played this game for {{player.time.floor()}} seconds.<br>
-        You have made a total of {{player.tpoints.floor()}} points.<br>
         Your fastest prestige is {{Math.floor(player.fastestprestige)}} seconds.<br>
         You have spent {{Math.floor(player.prestigetime)}} seconds within this prestige.<br>
         You have bought {{player.puBought}} total Prestige Upgrades.
@@ -145,8 +176,6 @@
               Making it rain
             </button>
           </td>
-        </tr>
-        <tr>
           <td>
             <button id="ach5" :class="{achcomp:(player.achs[4] == 1), ach:!(player.achs[4] == 1)}" title="Get 30 buildings in total">
               Bob the builder
@@ -157,6 +186,8 @@
               Prestige Game
             </button>
           </td>
+        </tr>
+        <tr>
           <td>
             <button id="ach7" :class="{achcomp:(player.achs[6] == 1), ach:!(player.achs[6] == 1)}" title="Get 10000 points per second">
               GAS GAS GAS
@@ -167,10 +198,8 @@
               Wait, that's illegal
             </button>
           </td>
-        </tr>
-        <tr>
           <td>
-            <button id="ach9" :class="{achcomp:(player.achs[8] == 1), ach:!(player.achs[8] == 1)}" title="Buy 2 Prestige Upgrades">
+          <button id="ach9" :class="{achcomp:(player.achs[8] == 1), ach:!(player.achs[8] == 1)}" title="Buy 2 Prestige Upgrades">
               Finally<br><br>b
             </button>
           </td>
@@ -209,6 +238,104 @@
           <td>
             <button id="ach16" :class="{achcomp:(player.achs[15] == 1), ach:!(player.achs[15] == 1)}" title="Reach 1 billion points">
               Billionaire
+            </button>
+          </td>
+          <td>
+            <button id="ach17" :class="{achcomp:(player.achs[16] == 1), ach:!(player.achs[16] == 1)}" title="Buy 10 Prestige Upgrades">
+              Master of b
+            </button>
+          </td>
+          <td>
+            <button id="ach18" :class="{achcomp:(player.achs[17] == 1), ach:!(player.achs[17] == 1)}" title="Reach 1 trillion points">
+              Trillionaire
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="ach19" :class="{achcomp:(player.achs[18] == 1), ach:!(player.achs[18] == 1)}" style="font-size: 9px" title="Buy a Tier 2 Derivative">
+              NEW DERIVATIVES????
+            </button>
+          </td>
+          <td>
+            <button id="ach20" :class="{achcomp:(player.achs[19] == 1), ach:!(player.achs[19] == 1)}" title="Make a building produce another building">
+              Polynomial
+            </button>
+          </td>
+          <td>
+            <button id="ach21" :class="{achcomp:(player.achs[20] == 1), ach:!(player.achs[20] == 1)}" title="Reach 10000 b">
+              That's a lot of b
+            </button>
+          </td>
+          <td>
+            <button id="ach22" :class="{achcomp:(player.achs[21] == 1), ach:!(player.achs[21] == 1)}" title="Prestige 100 times">
+              Divine
+            </button>
+          </td>
+          <td>
+            <button id="ach23" :class="{achcomp:(player.achs[22] == 1), ach:!(player.achs[22] == 1)}" title="Prestige for at least 10 b without buying anything">
+              Is this even a prestige anymore?
+            </button>
+          </td>
+          <td>
+            <button id="ach24" :class="{achcomp:(player.achs[23] == 1), ach:!(player.achs[23] == 1)}" title="Get all of the Prestige Upgrades">
+              Powered up
+            </button>
+          </td>
+        </tr>
+      </table><br><br>
+      <table>
+        <tr>
+          <td>
+            <button id="sach1" :class="{achcomp:(player.sachs[0] == 1), ach:!(player.sachs[0] == 1)}" title="The Dark Side">
+              {{player.sachs[0] ? "The Dark Side" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach2" :class="{achcomp:(player.sachs[1] == 1), ach:!(player.sachs[1] == 1)}" title="Paid respects">
+              {{player.sachs[1] ? "Paid respects" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach3" :class="{achcomp:(player.sachs[2] == 1), ach:!(player.sachs[2] == 1)}" title="You followed the instructions">
+              {{player.sachs[2] ? "You followed the instructions" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach4" :class="{achcomp:(player.sachs[3] == 1), ach:!(player.sachs[3] == 1)}" title="All you have to do is ask" onclick="app.player.sachs[3] = 1">
+              {{player.sachs[3] ? "All you have to do is ask" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach5" :class="{achcomp:(player.sachs[4] == 1), ach:!(player.sachs[4] == 1)}" title="Fake News">
+              {{player.sachs[4] ? "Fake News" : "???"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="sach6" :class="{achcomp:(player.sachs[5] == 1), ach:!(player.sachs[5] == 1)}" title="There's no click button">
+              {{player.sachs[5] ? "There's no click button" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach7" :class="{achcomp:(player.sachs[6] == 1), ach:!(player.sachs[6] == 1)}" title="Just plain lucky">
+              {{player.sachs[6] ? "Just plain lucky" : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach8" :class="{achcomp:(player.sachs[7] == 1), ach:!(player.sachs[7] == 1)}" title="Nice.">
+              {{player.sachs[7] ? "Nice." : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach9" :class="{achcomp:(player.sachs[8] == 1), ach:!(player.sachs[8] == 1)}" title="How the tables have turned...">
+              {{player.sachs[8] ? "How the tables have turned..." : "???"}}
+            </button>
+          </td>
+          <td>
+            <button id="sach10" :class="{achcomp:(player.sachs[9] == 1), ach:!(player.sachs[9] == 1)}" title="Incrementers% Speedrun">
+              {{player.sachs[9] ? "Incrementers% Speedrun" : "???"}}
             </button>
           </td>
         </tr>
@@ -270,6 +397,60 @@
         </button>
           </td>
         </tr>
+        <tr>
+          <td>
+        <button id="pu11" :class="{pulocked: (player.b.lt(player.puCosts[10]) && player.pu[10] == 0), pubuyable: (player.b.gte(player.puCosts[10]) && player.pu[10] == 0), pubought: (player.pu[10] == 1)}" onclick="buyPU(11)">
+          Make the b formula better <br> Cost: 500 b
+        </button>
+          </td>
+          <td>
+        <button id="pu12" style="font-size: 11px" :class="{pulocked: (player.b.lt(player.puCosts[11]) && player.pu[11] == 0), pubuyable: (player.b.gte(player.puCosts[11]) && player.pu[11] == 0), pubought: (player.pu[11] == 1)}" onclick="buyPU(12)">
+          Repeal the building synergies from PU3 and PU8, but gain a multiplier to point production based on buildings bought <br> Cost: 1000 b <br> Currently: {{D(0).plus(player.incrementers).add(player.workers).add(player.banks)}}x
+        </button>
+          </td>
+          <td>
+        <button id="pu13" :class="{pulocked: (player.b.lt(player.puCosts[12]) && player.pu[12] == 0), pubuyable: (player.b.gte(player.puCosts[12]) && player.pu[12] == 0), pubought: (player.pu[12] == 1)}" onclick="buyPU(13)">
+          Derivative cost scaling 1.1x <br> Cost: 10000 b
+        </button>
+          </td>
+          <td>
+        <button id="pu14" :class="{pulocked: (player.b.lt(player.puCosts[13]) && player.pu[13] == 0), pubuyable: (player.b.gte(player.puCosts[13]) && player.pu[13] == 0), pubought: (player.pu[13] == 1)}" onclick="buyPU(14)">
+          Buying a building doesn't decrease points <br> Cost: 15000 b
+        </button>
+          </td>
+          <td>
+        <button id="pu15" :class="{pulocked: (player.b.lt(player.puCosts[14]) && player.pu[14] == 0), pubuyable: (player.b.gte(player.puCosts[14]) && player.pu[14] == 0), pubought: (player.pu[14] == 1)}" onclick="buyPU(15)">
+          Make the DP mult formula better, and you gain 2x more DP <br> Cost: 50000 b
+        </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+        <button id="pu16" :class="{pulocked: (player.b.lt(player.puCosts[15]) && player.pu[15] == 0), pubuyable: (player.b.gte(player.puCosts[15]) && player.pu[15] == 0), pubought: (player.pu[15] == 1)}" onclick="buyPU(16)">
+          Make Banks produce Workers <br> Cost: 100000 b
+        </button>
+          </td>
+          <td>
+        <button id="pu17" :class="{pulocked: (player.b.lt(player.puCosts[16]) && player.pu[16] == 0), pubuyable: (player.b.gte(player.puCosts[16]) && player.pu[16] == 0), pubought: (player.pu[16] == 1)}" onclick="buyPU(17)">
+          Make Workers produce Incrementers <br> Cost: 150000 b
+        </button>
+          </td>
+          <td>
+        <button id="pu18" :class="{pulocked: (player.b.lt(player.puCosts[17]) && player.pu[17] == 0), pubuyable: (player.b.gte(player.puCosts[17]) && player.pu[17] == 0), pubought: (player.pu[17] == 1)}" onclick="buyPU(18)">
+          Make Incrementers produce Banks <br> Cost: 200000 b
+        </button>
+          </td>
+          <td>
+        <button id="pu19" style="font-size: 11px" :class="{pulocked: (player.b.lt(player.puCosts[18]) && player.pu[18] == 0), pubuyable: (player.b.gte(player.puCosts[18]) && player.pu[18] == 0), pubought: (player.pu[18] == 1)}" onclick="buyPU(19)">
+          Gain a multiplier to point & building production based on achievements completed <br> Cost: 1000000 b <br> Currently: {{Math.round(player.achsCompleted**1.5*1000)/1000}}x
+        </button>
+          </td>
+          <td>
+        <button id="pu20" :class="{pulocked: (player.b.lt(player.puCosts[19]) && player.pu[19] == 0), pubuyable: (player.b.gte(player.puCosts[19]) && player.pu[19] == 0), pubought: (player.pu[19] == 1)}" onclick="buyPU(20)">
+          Gain 100x more b, and make derivatives more effective based on unspent b <br> Cost: 100000000 b <br> Currently: {{player.b.add(1).log(10).add(1).toFixed(3)}}x
+        </button>
+          </td>
+        </tr>
       </table>
       <br><br>
       <button id="autoprestige" v-if="player.pu[8] == 1" onclick="toggleAuto(4)">
@@ -279,11 +460,13 @@
     </div>
     <br><br><br><br>
     <div>
-      Version 1.1.2
+      Version 1.2.0
     </div>
     </div>
     <script src="js/game.js"></script>
     <script src="js/save.js"></script>
-    <script>load(); setInterval(save, 10000)</script>
+    
+    <script>load(); setInterval(save, 100)</script>
+    <script>initiate()</script>
   </body>
 </html>
