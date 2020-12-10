@@ -14,7 +14,7 @@ newsArray = [
     ["Vue fucked up everything, and then didn't",true,"a10"],
     ["To-do: add a click button",true,"a11"],
     ["lol get rekt",true,"a12"],
-    ["<p onclick=\"window.location.href=\"https://www.youtube.com/watch?v=DLzxrzFCyOs\"\">Click me!</p>",true,"a13"],
+    ["https://www.youtube.com/watch?v=DLzxrzFCyOs",true,"a13"],
     ["You can't reach 1.79e308 (yet)",true,"a14"],
     ["That's a lot of b",true,"a15"],
     ["Prestige Game NGUd'^^-----++++ when?",true,"a16"],
@@ -114,12 +114,12 @@ newsArray = [
     ["OMG PETER GRIFIN FROM GUYY FAMILY SAID THE P**** WORD!!1!1",true,"a110"],
     ["Ness isn't Sans, Tuba is",true,"a111"],
     ["Achievements++",true,"a112"],
-    ["Discord doesn't like swears, accoring to The Nefarious DDT",true,"a113"],
+    ["Discord doesn't like swears, according to The Nefarious DDT",true,"a113"],
     ["nitro is waste of money lol",true,"a114"],
     ["Will Tuba copy Distance Incremental next??? No one knows!",true,"a115"],
     ["Putting more exclamation marks at the end of your sentence doesn't make it have more emphasis, instead, it makes you look stupid",true,"a116"],
     ["The 4th building will be [REDACTED]. It will cost NaNeNaN^NaNeNaN points.",true,"a117"],
-    ["If I'm not mistaken, there are currently 285 news tickers.",true,"a118"], //If I'm not mistaken 2
+    ["If I'm not mistaken, there are currently 346 news tickers.",true,"a118"], //If I'm not mistaken 2
     ["Jadronize coming 2029",true,"a119"],
     ["In the beginning, there was nothingness. There was white space, and the only message there was was 'Welcome to Prestige Game'. It was in bold text, and it looked really dumb. But then a rift appeared, and randomtuba emerged from the rift. He created some cool shit like Points, Incrementers, Workers, and Banks. He made Banks really powerful, so powerful that it crashed the fucking stock market. But randomtuba didn't care, he was too busy fucking up the game until unpingabot had to fix the absolute doodoo water that randomtuba created. Then randomtuba made 'b' that could be used for cool stuff like upgrades and these super expensive things called 'Derivatives'. He also created some useless automation crap, whatever that means. Then randomtuba said he was done, and he created Google Chrome so unpingabot could host the Glitch project on GitHub. He called it 'Prestige Game', an unoriginal title for a game that doesn't need to exist. The game? It's a load of shit, 1/10",true,"a120"],
     ["join the discord server or else bad luck for life",true,"a121"],
@@ -158,7 +158,7 @@ newsArray = [
     ["break_your_sanity.js",true,"a154"],
     ["9th dimesion wehn???",true,"a155"],
     ["Esta oración está en español y no agrega nada a este juego.",true,"a156"],
-    ["If I'm not mistaken, the current version number is v1.1.2.",true,"a157"], //If I'm not mistaken 3
+    ["If I'm not mistaken, the current version number is v1.2.0.",true,"a157"], //If I'm not mistaken 3
     ["Anti-Cars 2 a huge hit",true,"a158"],
     ["Timewalls? Well, this game isn't Ordinal Markup, that's what.",true,"a159"],
     ["Go play outside, you should consider taking a break",true,"a160"],
@@ -222,7 +222,7 @@ newsArray = [
     ["No microtransactions whatsoever! What a surprise!",true,"a218"],
     ["One of our reporters said to a man, 'How much time did it take for you to get 'Billionaire' on your first run?'. The man replied, 'Yes.'.",true,"a219"],
     ["How am I meant to get pregananant.?",true,"a220"],
-    ["WW91IHJlYWxseSB0b29rIHRoZSB0aW1lIHRvIGRlY29kZSB0aGlzIGludG8gbm9ybWFsIHRleHQ/IFdvdy4gVGhhdCBpcyByZWFsbHkgc3R1cGlkLiBBY3R1YWxseSwgSSBoYXZlIGEgc2VjcmV0IGZvciB5b3UuIEFhcmV4IHdpbGwgcmVsZWFzZSB0aGUgR2hvc3RpZnkgdXBkYXRlIGluIDUuMDEgaG91cnMuICBBbmQgQWFyZXgsIGlmIHlvdSBhcmUgcmVhZGluZyB0aGlzLCBhZGQgaW4gbXkgbmV3cyB0aWNrZXJzLiBObywganVzdCBraWRkaW5nLiBZb3UgZG9uJ3QgaGF2ZSB0by4=",true,"a221"]
+    ["WW91IHJlYWxseSB0b29rIHRoZSB0aW1lIHRvIGRlY29kZSB0aGlzIGludG8gbm9ybWFsIHRleHQ/IFdvdy4gVGhhdCBpcyByZWFsbHkgc3R1cGlkLiBBY3R1YWxseSwgSSBoYXZlIGEgc2VjcmV0IGZvciB5b3UuIEFhcmV4IHdpbGwgcmVsZWFzZSB0aGUgR2hvc3RpZnkgdXBkYXRlIGluIDUuMDEgaG91cnMuICBBbmQgQWFyZXgsIGlmIHlvdSBhcmUgcmVhZGluZyB0aGlzLCBhZGQgaW4gbXkgbmV3cyB0aWNrZXJzLiBObywganVzdCBraWRkaW5nLiBZb3UgZG9uJ3QgaGF2ZSB0by4=",true,"a221"],
     ["'Cosmic47 stop DMing me, I have 78 pings' -randomtuba",true,"a222"],
     ["If you ever get to 2^^6 b, you cheated",true,"a223"],
     ["Just monika",true,"a224"],
@@ -259,7 +259,7 @@ newsArray = [
     ["Bee Movie 2 coming in 6 hours",true,"a255"],
     ["https://dan-simon.github.io/misc/fe000000",true,"a256"],
     ["Fuck chroma",true,"a257"],
-    ["[REDACTED]",true,"a258"],
+    ["Ow, that hurt! Stop clicking me!",true,"a258"],
     ["randomtuba should stop drinking 10 gallons of valve oil",true,"a259"],
     ["New news company has become rivals with us. The company name is 'Universal Paperclips, Inc.' They also make paperclips that gain a lot of Trust.",true,"a260"],
     ["'we have more news tickers than content, epic' -Cosmic47",true,"a261"],
@@ -286,7 +286,69 @@ newsArray = [
     ["tick... tick... tick... wait why are we waiting here again? why are we even... well never mind. i think these words are just sponsored by Raid: Shadow Legends and to make the thing longer... wait... what thing... i have confuzzeled myself yet again...",true,"a282"],
     ["Fun fact: Masks are actually gay",true,"a283"],
     ["'someone to die? hehewoowowowowow' - abraham lincoln",true,"a284"],
-    ["'fucking eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' -unp©gged™",true,"a285"]
+    ["'fucking eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' -unp©gged™",true,"a285"],
+    ["hyperinflation when?",true,"a286"],
+    ["new phone who dis",true,"a287"],
+    ["Everyone asks who made the ticker, but not how they made the tickers",true,"a288"],
+    ["w",true,"a289"],
+    ["Procrastination has gotta b the reason why the game hasn't been updated",true,"a290"],
+    ["Prestige Game v10.0.0 will release in 5.00001 hours",true,"a291"],
+    ["Click this to obtain a secret achievement.",true,"a292"], //Secret Achievement 5
+    ["Slowmode is enabled.",true,"a293"],
+    ["'So that's y' -jan Misali",true,"a294"],
+    ["25,805,009,160",true,"a295"],
+    ["'Gonna make you die, SAY GOODBYE' -Rick Astley",true,"a296"],
+    ["[insert b-related pun here]",true,"a297"],
+    ["'i'm really only in the discord for the minigame channels' -Dest",true,"a298"],
+    ["This statement is false.",true,"a299"],
+    ["In the code, this news ticker is the 300th news ticker! Yay!",true,"a300"],
+    ["This game wouldn't be possible without incrementers.",true,"a301"],
+    ["special thanks to spaghetti code",true,"a302"],
+    ["Oh no, hyperinflation! Oh, they were using the console.",true,"a303"],
+    ["'Does making achievement 304 (in the code) mean anything?' - gapples2",true,"a304"],
+    ["Hehehe I'm going to advertise in #general and- oh wait I'm banned.",true,"a305"],
+    ["Enter cancer for a secret- WHAT?!?! There isn't secret themes? QyBpcyByZWFsIDI0MDE=",true,"a306"],
+    ["don't go into the console plz",true,"a307"],
+    ["is this a reference to nothing? yeah, it is.",true,"a308"],
+    ["v1ee10.0.0 coming out in 5 centuries",true,"a309"],
+    ["'plz suggest more newstickers' - gapples2",true,"a310"],
+    ["Fun fact: there is more than 2 tickers in the game!",true,"a311"],
+    ["There's so many discord games in the discord server! What's next, 1,000,000 zeroes?",true,"a312"],
+    ["QyBpcyByZWFsIDI0MDE=",true,"a313"],
+    ["Click this news ticker for +0.0000000000000000000000001 points",true,"a314"],
+    ["Imagine the chaos that would occur if dark mode didn't exist.",true,"a315"],
+    ["C is not real...or is it?",true,"a316"],
+    ["In 3 decades Aarex timewalls won't exist.",true,"a317"],
+    ["'Dark Theme > Light Theme' -randomtuba",true,"a318"],
+    ["google.com would like to know your location",true,"a319"],
+    ["a1000 does not exist",true,"a320"],
+    ["Press CTRL+W for +5 b",true,"a321"],
+    ["'How did I get 0.015172485164829616 b from 5 b' -randomtuba",true,"a322"],
+    ['"unsoftcapped is the best" -randomtuba',true,"a323"],
+    ["'goodbye word' -DEMEMZEA",true,"a324"],
+    ["'bruh' -hurb",true,"a325"],
+    ["Hi, this is not a joke ticker, but it is just to show how tickers are made. The code of the news ticker was made by an australian, and this is his video: https://youtu.be/oHg5SJYRHA0",true,"a326"],
+    ["'I am going to force Jacorb to update TPT:R, I need more procrastination' -randomtuba",true,"a327"],
+    ["'I'm just trying to get my name on the tickers' -Froasans",true,"a328"],
+    ["Help, I've fallen, and I can't get up!",true,"a329"],
+    ["Hey man, you don't think you can put my idea in your news ticker without paying me, do you?",true,"a330"],
+    ["I dare you to get 'Is this even a prestige anymore?' on your first run",true,"a331"],
+    ["testerest",true,"a332"],
+    ["I'm gonna say the n-word...NEXTUPDATEINFIVEHOURS",true,"a333"],
+    ["Derivative Shifts when?",true,"a334"],
+    ["Hey shitass, wanna see me speedrun Prestige Game?",true,"a335"],
+    ['"""""""""""":kekw:" -randomtuba" -unpogged" -The Nefarious DDT" - unsoftcapped" -The Nefarious DDT" -unpogged" -unsoftcapped" -unpogged" - faroshkas" -The Nefarious DDT" -unsoftcapped" -unpogged" - randomtuba"',true,"a336"],
+    ["'This news ticker suggestion was edited after accepted. I broke the system' -froasans",true,"a337"],
+    ["Tick tock, hurry up, the news is ticking...",true,"a338"],
+    ["'there is never enough news tickers' -Cosmic47",true,"a339"],
+    ["'im gonna make news tickers' -unp©gged™",true,"a340"],
+    ["'you leaked the test link >:(' -every developer with a game that has test links",true,"a341"],
+    ["lol, 300 + 42",true,"a342"],
+    ["these are just pointless news tickers, why are you reading these? hello? are you even there? come back to see me ranting about you not seeing this! damn it... CCCCCCCCCCOOOOOOOOOOOOMMMMMMMMMMMEEEEEEEEEEE BBBBBBBBBBBBAAAAAAAAAAAACCCCCCCCCCCCCKKKKKKKKKKK OOOOOOOOOOOOORRRRRRRRRRRR EEEEEEEEEELLLLLLLLLLLLSSSSSSSSSSSSSEEEEEEEEEEEEEE!!!!!!!!!!!!!!!",true,"a343"],
+    ["when are we reaching ee69.420 :weary:",true,"a344"],
+    ["undoodoo water :flushed:",true,"a345"],
+    ["`This is a bad idea...` said somebody. 'Why?' asked the other person. 'Well, you know how I randomly said that the Reality update will release in 5.0000000001 hours? And not 5?' `Yes... what's the... problem with that?` 'Nothing especially. It just felt good to do it, so I think I might broadcast it by pinging @everyone and saying that the reality update will come in 6 hours. That's sure to get their attention, right?' 'Seems like a good plan. Except...' 'Except what?' 'Except... wouldn't... wouldn't you get in trouble... if... if you were caught?' 'So?' 'Never mind... but hey. At least we can break the fourth wall...' 'Yeah, I guess. I mean, why are the developers trying to make this news ticker so damn long? It's ridiculous for a developer to even do that.' 'I don't know, but back in your developing days, you did it too... didn't you?' 'What? I bet I have never done such a thing.' 'How much do youu want to bet?' 'I want to bet... 1e69b, 69e420 points, 420e69 derivatives, and lastly, all of my antimatter.' 'Are you sure? That'll make you go bankrupt.' 'Oh, that's funny. It'll make you in debt if I win.' 'Why are you even in the spirit of a bet?' 'Why not? I mean, you had fun `disproving` my point, didn't you?' 'Well, yeah, but, why specifically a bet?' 'So we don't end this news ticker. Fourth wall-breaking again, right?' 'I guess. Well, I'm gonna stop this news ticker.' 'What? Why?!' 'It's too long, and I bet anybody is even interested in reading this.' 'Ugh, ok, fine, signing off.'",true,"a346"],
+    ['"FINALLY! The update is released! Just going to publish it and- OH COME ON! 1ee308 more bugs?!?!?! WHY?!?!?! WHY?!?!?- And that is what happened on that day. F in the chat."-the newsticker',true,"a347"]
 ];}
 
 var s;
@@ -309,10 +371,9 @@ function scrollNextMessage() {
 
   scrollTimeouts.forEach(function(v) {clearTimeout(v);});
   scrollTimeouts = [];
-
+    
   //set the text
-  s.textContent = newsArray[nextMsgIndex][0];
-
+  s.textContent = newsArray[nextMsgIndex][0]; //im going to test this
   //get the parent width so we can start the message beyond it
   let parentWidth = s.parentElement.clientWidth;
 

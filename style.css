@@ -52,8 +52,8 @@ button {
   height: 100px;
   width: 150px;
   color: white;
-  background-color: red;
-  border-color: red;
+  background-color: #00FF00;
+  border-color: #00FF00;
   transition-duration: 0.2s;
 }
 

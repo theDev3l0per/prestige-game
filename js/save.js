@@ -23,7 +23,8 @@ function load() {
 
 function importSave() {
   x = window.prompt("Please enter your save here")
-  if (typeof localStorage.game != "undefined") app.player = loopAssign(app.player, JSON.parse(window.atob(x))) //this function doesn't work
+  if (x=="your save here") app.player.sachs[2]=1
+  if (typeof localStorage.game != "undefined") app.player = loopAssign(app.player, JSON.parse(window.atob(x)))
   save()
 }
 
@@ -47,18 +48,23 @@ function reset() {
       tickspeed: 50,
       b: "0",
       tab: 1,
-      pu: [0,0,0,0,0,0,0,0,0,0],
-      puCosts: [1,3,5,5,10,15,20,30,50,50],
+      pu: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      puCosts: [1,3,5,5,10,15,20,30,50,50,500,1000,10000,15000,50000,100000,150000,200000,1000000,100000000],
       automators: [false,false,false,false],
       autoprestigeamt: 1,
       pps: "0",
       prestiges: 0,
       theme: true,
-      achs: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      achs: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       tpoints: "0",
       prestigetime: 0,
       fastestprestige: 42069,
-      puBought: 0
+      puBought: 0,
+      sachs: [0,0,0,0,0,0,0,0,0,0],
+      clicks: 0,
+      luck: 0,
+      pointsThisPrestige: "0",
+      achsCompleted: 0
     };
     save();
     load();
